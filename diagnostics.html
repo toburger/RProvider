@@ -71,8 +71,14 @@ from Dock or in some other way, it will not see the variable!</p>
 
 <p>The following should do the trick (assuming the folder <code>/Users/tomasp/Temp</code> exists):</p>
 
-<table class="pre"><tr><td><pre lang="text">export RPROVIDER_LOG=/Users/tomasp/Temp/rlog.txt
-open -n /Applications/Xamarin\ Studio.app/</pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip" lang="text">export RPROVIDER_LOG=/Users/tomasp/Temp/rlog.txt
+open -n /Applications/Xamarin\ Studio.app/
+</pre></td></tr></table>
 
 <p>This will set the variable and start a new instance of Xamarin Studio in the current
 context. Once it appears, reporduce the operation that causes the error, close

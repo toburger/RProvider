@@ -47,6 +47,8 @@ in the host IDE process (Visual Studio, Xamarin Studio etc.)</p>
 
 <p>NOTE: In order to support standalone compilation of <code>RProvider.Server.exe</code> (which 
 inlines the F# Core library), the interface does not expose any F# Core types.</p>
+
+
 </div>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
@@ -74,6 +76,8 @@ inlines the F# Core library), the interface does not expose any F# Core types.</
 function. The second string is serialized <code>RValue</code> with information about the
 kind of the binding and function parameters (use <code>deserializeRValue</code>).</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -93,6 +97,8 @@ kind of the binding and function parameters (use <code>deserializeRValue</code>)
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Returns an array with pairs consisting of function name and its description</p>
+
+
 
         </td>
       </tr>
@@ -114,6 +120,8 @@ kind of the binding and function parameters (use <code>deserializeRValue</code>)
             </a>
           <p>Returns the description (documentation) for a given package</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -133,6 +141,8 @@ kind of the binding and function parameters (use <code>deserializeRValue</code>)
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Returns an array with the names of all installed packages (e.g. "base", "graphics" etc.)</p>
+
+
 
         </td>
       </tr>
@@ -157,6 +167,8 @@ with an F# type that it can be converted to (this is done by getting the type
 of <code>symExpr.Value</code> using currently installed convertors). If the type is not 
 available, this returns <code>null</code>.</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -178,6 +190,8 @@ available, this returns <code>null</code>.</p>
           <p>If there was an initialization error when loading R provider, this
 string returns the error. Otherwise, the value is <code>null</code>.</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -197,6 +211,8 @@ string returns the error. Otherwise, the value is <code>null</code>.</p>
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Loads the package (using R's <code>require</code>). This should be called before <code>GetBindings</code>.</p>
+
+
 
         </td>
       </tr>
