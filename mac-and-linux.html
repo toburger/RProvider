@@ -68,47 +68,41 @@ you may need if the simplified version below does not work for you.</p>
 <code>autoconf</code>, <code>automake</code> and <code>libtool</code>. Probably the easiest way to do this is to install
 <a href="http://brew.sh/">Homebrew</a> (but feel free to use your favorite tool) and then run:</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip" lang="text">brew install automake
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="text">brew install automake
 brew install autoconf
 brew install libtool
-</pre></td></tr></table>
+</code></pre></td></tr></table>
 
 <p>Now you can use <code>git</code> to get the latest version of Mono from GitHub and install it. The 
 following installs it into <code>/usr/local/mono64</code> (feel free to change this too):</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 <span class="l">5: </span>
 <span class="l">6: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip" lang="text">export MONO_PREFIX=/usr/local/mono64
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="text">export MONO_PREFIX=/usr/local/mono64
 git clone https://github.com/mono/mono.git
 cd mono
 ./autogen.sh --prefix=$MONO_PREFIX --disable-nls  
 make
 make install
-</pre></td></tr></table>
+</code></pre></td></tr></table>
 
 <p>You might get a timeout from <code>git</code> when running the <code>autogen</code>-command, if you are behind
 a firewall. To fix this just run the following, which will force <code>git</code> to clone using
 "<a href="https://"">https://"</a> instead of "git://":</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip" lang="text">git config --global url."https://".insteadOf git://
-</pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="text">git config --global url."https://".insteadOf git://
+</code></pre></td></tr></table>
 
 <p>Now we can run Mono in 64-bit explicitly using <code>/usr/local/mono64/bin/mono</code>. Next, we need 
 to create a launcher script that will start F# Interactive in 64 bit.</p>
@@ -124,18 +118,16 @@ the bit that points to the Mono installation, so that it points to the newly ins
 version. Also, change <code>fsi.exe</code> to <code>fsiAnyCpu.exe</code> at the end. The whole thing should be on
 a single line, but the following shows it with newlines for better readability:</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip" lang="bash">$EXEC /usr/local/mono64/bin/mono  
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="bash">$EXEC /usr/local/mono64/bin/mono  
     $DEBUG $MONO_OPTIONS 
     /Library/Frameworks/Mono.framework/Versions/3.4.0/lib/mono/4.0/fsiAnyCpu.exe 
     --exename:$(basename $0) "$@"
-</pre></td></tr></table>
+</code></pre></td></tr></table>
 
 <p>When you start Xamarin Studio, you can now tell it to use <code>fsharpi64</code> instead of <code>fsharpi</code>.
 To do this, go to <code>Preferences &gt; Other &gt; F# Settings &gt; F# interactive</code>. Once you change this,
@@ -151,12 +143,10 @@ line <code>MONO64=/usr/local/mono64/bin/mono</code>.</p>
 
 <p>You can create the file using the following command:</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip" lang="text">echo MONO64=$MONO_PREFIX/bin/mono > ~/.rprovider.conf
-</pre></td></tr></table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="text">echo MONO64=$MONO_PREFIX/bin/mono > ~/.rprovider.conf
+</code></pre></td></tr></table>
 
 <p>And this is all you should need! One more thing to check is to make sure that R is in your
 PATH (and the R provider will be able to find it). To do that, open Terminal and type
@@ -176,8 +166,7 @@ for "rprovider").</p>
 
 <p>Now, type the following in the script file (with the correct R provider version):</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
@@ -185,10 +174,8 @@ for "rprovider").</p>
 <span class="l">6: </span>
 <span class="l">7: </span>
 <span class="l">8: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="prep">#nowarn</span> <span class="s">&quot;211&quot;</span>
+</code></td>
+<td class="snippet"><pre class="fssnip"><code lang="fsharp"><span class="prep">#nowarn</span> <span class="s">&quot;211&quot;</span>
 <span class="prep">#I</span> <span class="s">&quot;packages/RProvider.1.1.4&quot;</span>
 <span class="prep">#load</span> <span class="s">&quot;RProvider.fsx&quot;</span>
 
@@ -196,8 +183,7 @@ for "rprovider").</p>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">RProvider</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="i">graphics</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="i">RProvider</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 5)" onmouseover="showTip(event, 'fs3', 5)" class="i">grDevices</span>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 6)" onmouseover="showTip(event, 'fs1', 6)" class="i">RProvider</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 7)" onmouseover="showTip(event, 'fs4', 7)" class="i">datasets</span>
-</pre>
-</td>
+</code></pre></td>
 </tr>
 </table>
 
@@ -208,8 +194,7 @@ open a number of standard R packages.</p>
 <p>Now we can run some calculations and create charts. When using R on Mac, the default graphics
 device (Quartz) sometimes hangs, but X11 is working without issues, so the following uses X11:</p>
 
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
 <span class="l"> 4: </span>
@@ -219,10 +204,8 @@ device (Quartz) sometimes hangs, but X11 is working without issues, so the follo
 <span class="l"> 8: </span>
 <span class="l"> 9: </span>
 <span class="l">10: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="f">x11</span>()
+</code></td>
+<td class="snippet"><pre class="fssnip"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="f">x11</span>()
 
 <span class="c">// Calculate sin using the R &#39;sin&#39; function</span>
 <span class="c">// (converting results to &#39;float&#39;) and plot it</span>
@@ -232,8 +215,7 @@ device (Quartz) sometimes hangs, but X11 is working without issues, so the follo
 
 <span class="c">// Plot the data from the standard &#39;Nile&#39; data set</span>
 <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="f">plot</span>(<span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="i">Nile</span>)
-</pre>
-</td>
+</code></pre></td>
 </tr>
 </table>
 
