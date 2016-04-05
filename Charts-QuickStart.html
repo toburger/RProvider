@@ -38,18 +38,14 @@
         <div class="span9" id="main">
           
 <h1>Quickstart: Creating Charts</h1>
-
 <p>One of the compelling features of R is its ability to create beautiful charts.
-With the R Type Provider, you can use all of R capabilities from F#, 
-and create simple charts quickly to explore and visualize your data on-the-fly, 
+With the R Type Provider, you can use all of R capabilities from F#,
+and create simple charts quickly to explore and visualize your data on-the-fly,
 as well as generate publication quality graphics that can be exported to virtually any format.</p>
-
 <h2>Charts Basics</h2>
-
-<p>Basic charts can be found in the graphics package. 
-Assuming you installed the R Type Provider in your project from NuGet, 
+<p>Basic charts can be found in the graphics package.
+Assuming you installed the R Type Provider in your project from NuGet,
 you can reference the required libraries and packages this way:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -68,10 +64,8 @@ you can reference the required libraries and packages this way:</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p>Once the libraries and packages have been loaded, 
+<p>Once the libraries and packages have been loaded,
 producing basic charts is as simple as this:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -100,12 +94,9 @@ producing basic charts is as simple as this:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Exporting and Saving Charts</h2>
-
-<p>Charts can be exported and saved to various formats; 
+<p>Charts can be exported and saved to various formats;
 once you have opened the grDevices package, you can save a chart like this:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -125,7 +116,7 @@ once you have opened the grDevices package, you can save a chart like this:</p>
 <span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 24)" onmouseover="showTip(event, 'fs3', 24)" class="i">RProvider</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 25)" onmouseover="showTip(event, 'fs12', 25)" class="i">grDevices</span>
 
 <span class="c">// Create path to an image testimage.png on the Desktop</span>
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">desktop</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="t">Environment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="f">GetFolderPath</span>(<span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="t">Environment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="i">SpecialFolder</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="i">Desktop</span>)  
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="i">desktop</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="t">Environment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="f">GetFolderPath</span>(<span onmouseout="hideTip(event, 'fs14', 29)" onmouseover="showTip(event, 'fs14', 29)" class="t">Environment</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="t">SpecialFolder</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="i">Desktop</span>)  
 <span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 32)" onmouseover="showTip(event, 'fs18', 32)" class="i">path</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 33)" onmouseover="showTip(event, 'fs13', 33)" class="i">desktop</span> <span class="o">+</span> <span class="s">@&quot;\testimage.png&quot;</span>
 
 <span class="c">// Open the device and create the file as a png.</span>
@@ -138,19 +129,14 @@ once you have opened the grDevices package, you can save a chart like this:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Advanced Charts Options</h2>
-
-<p>The graphic functions exposed by the R Type Provider come in two flavors; 
-they either have optional named arguments, 
-followed by a ParamArray for extended arguments, 
-or they take named parameters, an IDictionary<string,object> 
+<p>The graphic functions exposed by the R Type Provider come in two flavors;
+they either have optional named arguments,
+followed by a ParamArray for extended arguments,
+or they take named parameters, an IDictionary<string,object>
 which contains all the arguments passed to the function.</p>
-
 <h3>Named Arguments</h3>
-
 <p>Consider for instance the following example:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -159,28 +145,22 @@ which contains all the arguments passed to the function.</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p>R.title has 2 signatures, one of them with optional arguments, 
-demonstrated above to set the main title as well as the labels for the x and y axis, 
-ignoring some of the other available options. 
+<p>R.title has 2 signatures, one of them with optional arguments,
+demonstrated above to set the main title as well as the labels for the x and y axis,
+ignoring some of the other available options.
 You can see another example in the previous section in the R.png call.</p>
-
 <h3>Named Parameters</h3>
-
-<p>Named parameters allow you to specify every argument supported by R, 
-as an IDictionary of string, object. 
+<p>Named parameters allow you to specify every argument supported by R,
+as an IDictionary of string, object.
 The string is the name of the argument, and the object its value.</p>
-
 <p>Finding the available arguments for a R function can be tricky;
-the full list of arguments can usually be found in the 
+the full list of arguments can usually be found in the
 <a href="http://stat.ethz.ch/R-manual/R-devel/library/">R developer documentation</a>,
 navigating in the correct package. For instance, R.plot belongs to
-graphics, and can be found 
+graphics, and can be found
 <a href="http://stat.ethz.ch/R-manual/R-devel/library/graphics/html/plot.html">here</a>.</p>
-
-<p>The easiest way to use that feature is to 
+<p>The easiest way to use that feature is to
 leverage the built-in function namedParams, like in this example:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -213,17 +193,13 @@ leverage the built-in function namedParams, like in this example:</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p>The first call specifies what to plot (widgets), 
-what type of line to use, the color, and the scale of the axis. 
-The second call adds sprockets, specifying lty (the line type), 
+<p>The first call specifies what to plot (widgets),
+what type of line to use, the color, and the scale of the axis.
+The second call adds sprockets, specifying lty (the line type),
 and pch (the plotting character).</p>
-
-<p>box is used to reduce all elements to objects, 
+<p>box is used to reduce all elements to objects,
 so that the lists have consistent types.</p>
-
 <p>A possibly more elegant way to use namedParams is to follow the pattern below:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>

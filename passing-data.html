@@ -38,28 +38,25 @@
         <div class="span9" id="main">
           
 <h1>Passing Data Between F# and R</h1>
-
 <h2>Passing Parameters</h2>
-
 <h3>Parameter Passing Conventions</h3>
-
 <p>R supports various kinds of parameters, which we try to map onto equivalent F# parameter types:</p>
-
 <ul>
-<li><p>All R formal parameters have names, and you can always pass their values either by name or positionally.  If you pass by name, you can skip arguments in your actual argument list.  We simply map these onto F# arguments, which you can also pass by name or positionally.</p></li>
-<li><p>In R, essentially all arguments are optional (even if no default value is specified in the function argument list).  It's up to the receiving function to determine whether to error if the value is missing.   So we make all arguments optional.</p></li>
-<li><p>R functions support ... (varargs/paramarray).  We map this onto a .NET ParamArray, which allows an arbitrary number of arguments to be passed.  However, there are a couple of kinks with this:</p>
+<li>All R formal parameters have names, and you can always pass their values either by name or positionally.  If you pass by name, you can skip arguments in your actual argument list.  We simply map these onto F# arguments, which you can also pass by name or positionally.</li>
+<li>In R, essentially all arguments are optional (even if no default value is specified in the function argument list).  It's up to the receiving function to determine whether to error if the value is missing.   So we make all arguments optional.</li>
+<li>
+<p>R functions support ... (varargs/paramarray).  We map this onto a .NET ParamArray, which allows an arbitrary number of arguments to be passed.  However, there are a couple of kinks with this:</p>
 <ul>
 <li><p>R allows named arguments to appear <em>after</em> the ... argument, whereas .NET requires the ParamArray argument to be at the end.  Some R functions use this convention because their primary arguments are passed in the ... argument and the named arguments will sometimes be used to modify the behavior of the function.  From the RProvider you will to supply values for the positional arguments before you can pass to the ... argument.  If you don't want to supply a value to one of these arguments, you can explicitly pass System.Reflection.Missing.</p></li>
-<li><p>Parameters passed to the R ... argument can also be passed using a name.  Those names are accessible to the calling function.  Example are list and dataframe construction (R.list, and R.data_frame).  To pass arguments this way, you can use the overload of each function that takes an IDictionary<string, obj>, either directly, or using the namedParams function.  For example:</p>
-<p>R.data_frame(namedParams [ "A", [|1;2;3|]; "B", [|4;5;6|] ])</p></li>
-</ul></li>
+<li>
+<p>Parameters passed to the R ... argument can also be passed using a name.  Those names are accessible to the calling function.  Example are list and dataframe construction (R.list, and R.data_frame).  To pass arguments this way, you can use the overload of each function that takes an IDictionary<string, obj>, either directly, or using the namedParams function.  For example:</p>
+<p>R.data_frame(namedParams [ "A", [|1;2;3|]; "B", [|4;5;6|] ])</p>
+</li>
 </ul>
-
+</li>
+</ul>
 <h3>Parameter Types</h3>
-
 <p>Since all arguments to functions are of type obj, it is not necessarily obvious what you can pass.  Ultimately, you will need to know what the underlying function is expecting, but here is a table to help you.  When reading this, remember that for most types, R supports only vector types.  There are no scalar string, int, bool etc. types.</p>
-
 <table class="table table-bordered table-striped">
 <tr><th>R Type</th><th>F#/.NET Type</th></tr>
 <tr><td>character</td><td>string or string[]</td></tr>
@@ -70,13 +67,9 @@
 <tr><td>list</td><td>Call R.list, passing the values as separate arguments</td><tr>
 <tr><td>dataframe</td><td>Call R.data_frame, passing column vectors in a dictionary</td><tr>
 </table>
-
 <p><strong>NB</strong>: For any input, you can also pass a SymbolicExpression instance you received as the result of calling another R function.  Doing so it a very efficient way of passing data from one function to the next, since there is no marshalling between .NET and R types in that case.</p>
-
 <h3>Creating and passing an R function</h3>
-
 <p>R has some high-level functions (e.g. sapply) that require a function parameter. Although F# has first-class support of functional programming and provides better functionality and syntax for apply-like operations, which often makes it sub-optimal to call apply-like high-level functions in R, the need for parallel computing in R, which is not yet directly supported by F# parallelism to R functions, requires users to pass a function as parameter. Here is an example way to create and pass an R function:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -85,19 +78,12 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p>The same usage also applies to parallel apply functions in parallel package.</p>
-
 <h2>Accessing results</h2>
-
 <p>Functions exposed by the RProvider return an instance of <code>RDotNet.SymbolicExpression</code>.  This keeps all return data inside R data structures, so does not impose any data marshalling overhead.  If you want to pass the value in as an argument to another R function, you can simply do so.</p>
-
 <p>In order to access the result in .NET code, you have three routes:</p>
-
 <h3>Convert the data into a specified .NET type via GetValue<type>()</h3>
-
 <p>RProvider adds a generic <code>GetValue&lt;'T&gt;</code> extension method to <code>SymbolicExpression</code>.  This supports conversions from certain R values to specific .NET types.  Here are the currently supported conversions:</p>
-
 <table class="table table-bordered table-striped">
 <tr><th>R Type</th><th>Requested F#/.NET Type</th></tr>
 <tr><td>character (when vector is length 1)</td><td>string</td></tr>
@@ -111,13 +97,9 @@
 <tr><td>numeric (when vector is length 1)</td><td>double</td></tr>
 <tr><td>numeric</td><td>double[]</td></tr>
 </table>
-
 <p>Custom conversions can be supported through <a href="plugins.html">plugins</a>.</p>
-
 <h3>Convert the data into the default .NET type the .Value property</h3>
-
 <p>We also expose an extension property called Value that performs a <em>default</em> conversion of a SymbolicExpresion to a .NET type.  These are the current conversions:</p>
-
 <table class="table table-bordered table-striped">
 <tr><th>R Type</th><th>F#/.NET Type</th></tr>
 <tr><td>character</td><td>string[]</td></tr>
@@ -126,13 +108,9 @@
 <tr><td>logical</td><td>bool[]</td></tr>
 <tr><td>numeric</td><td>double[]</td></tr>
 </table>
-
 <p>Again, custom conversions can be supported through <a href="plugins.html">plugins</a>.</p>
-
 <h3>Explicitly access the data in the SymbolicExpression</h3>
-
 <p>If there are no supported conversions, you can access the data through the RDotNet object model.  RDotNet exposes properties, members and extension members (available only if you open the RDotNet namespace) that allow you to access the underlying data directly.  So, for example:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -143,9 +121,7 @@
 </code></pre></td>
 </tr>
 </table>
-
 <p>To make this easier, we have defined some active patterns, under the RProvider.Helpers namespace, which is auto-opened when you open the RProvider namespace.  These combine the type tests and conversion.  An equivalent example:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -156,11 +132,8 @@
 </code></pre></td>
 </tr>
 </table>
-
 <h2>What if I commonly need an argument or result conversion that RProvider does not support?</h2>
-
 <p>If you believe the argument conversion is universally appropriate and should be available to everybody, please fork the repo and submit a pull request.</p>
-
 <p>RProvider also supports custom conversions to/from your own data types using <a href="plugins.html">plugins</a>.</p>
 
 <div class="tip" id="fs1">namespace System</div>

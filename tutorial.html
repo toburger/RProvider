@@ -38,13 +38,10 @@
         <div class="span9" id="main">
           
 <h1>R Provider Tutorial</h1>
-
 <h2>Referencing the provider</h2>
-
 <p>In order to use the R provider, you need to reference the <code>RDotNet.dll</code> library
 (which is a .NET connector for R) and the <code>RProvider.dll</code> itself. For this tutorial,
 we use <code>open</code> to reference a number of packages including <code>stats</code>, <code>tseries</code> and <code>zoo</code>:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -81,20 +78,15 @@ we use <code>open</code> to reference a number of packages including <code>stats
 </code></pre></td>
 </tr>
 </table>
-
 <p>If either of the namespaces above are unrecognized, you need to install the package in R
 using <code>install.packages("stats")</code>.</p>
-
 <h2>Obtaining data</h2>
-
 <p>In this tutorial, we use <a href="http://fsharp.github.io/FSharp.Data/">F# Data</a> to access stock
 prices from the Yahoo Finance portal. For more information, see the documentation for the
 <a href="http://fsharp.github.io/FSharp.Data/library/CsvProvider.html">CSV type provider</a>.</p>
-
 <p>The following snippet uses the CSV type provider to generate a type <code>Stocks</code> that can be
 used for parsing CSV data from Yahoo. Then it defines a function <code>getStockPrices</code> that returns
 array with prices for the specified stock and a specified number of days:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -127,13 +119,10 @@ array with prices for the specified stock and a specified number of days:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Calling R functions</h2>
-
 <p>Now, we're ready to call R functions using the type provider. The following snippet takes
-<code>msftOpens</code>, calculates logarithm of the values using <code>R.log</code> and then calculates the 
+<code>msftOpens</code>, calculates logarithm of the values using <code>R.log</code> and then calculates the
 differences of the resulting vector using <code>R.diff</code>:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -142,11 +131,9 @@ differences of the resulting vector using <code>R.diff</code>:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>If you want to see the resulting values, you can call <code>msft.AsVector()</code> in F# Interactive.
 Next, we use the <code>acf</code> function to display the atuo-correlation and call <code>adf_test</code> to
 see if the <code>msft</code> returns are stationary/non-unit root:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -155,17 +142,13 @@ see if the <code>msft</code> returns are stationary/non-unit root:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>After running the first snippet, a window similar to the following should appear (note that
 it might not appear as a top-most window).</p>
-
 <div style="text-align:center">
 <img src="images/acf.png" />
 </div>
-
 <p>Finally, we can obtain data for multiple different indicators and use the <code>R.pairs</code> function
 to produce a matrix of scatter plots:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -192,9 +175,7 @@ to produce a matrix of scatter plots:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>As a result, you should see a window showing results similar to these:</p>
-
 <div style="text-align:center">
 <img src="images/pairs.png" />
 </div>
@@ -206,8 +187,8 @@ to produce a matrix of scatter plots:</p>
 <div class="tip" id="fs5">namespace RProvider.zoo</div>
 <div class="tip" id="fs6">namespace System</div>
 <div class="tip" id="fs7">namespace System.Net</div>
-<div class="tip" id="fs8">namespace FSharp</div>
-<div class="tip" id="fs9">namespace FSharp.Data</div>
+<div class="tip" id="fs8">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="tip" id="fs9">Multiple items<br />namespace FSharp.Data<br /><br />--------------------<br />namespace Microsoft.FSharp.Data</div>
 <div class="tip" id="fs10">type Stocks = obj<br /><br />Full name: Tutorial.Stocks</div>
 <div class="tip" id="fs11">type CsvProvider<br /><br />Full name: FSharp.Data.CsvProvider<br /><em><br /><br />&lt;summary&gt;Typed representation of a CSV file.&lt;/summary&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Sample&#39;&gt;Location of a CSV sample file or a string containing a sample CSV document.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Separators&#39;&gt;Column delimiter(s). Defaults to `,`.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;InferRows&#39;&gt;Number of rows to use for inference. Defaults to `1000`. If this is zero, all rows are used.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Schema&#39;&gt;Optional column types, in a comma separated list. Valid types are `int`, `int64`, `bool`, `float`, `decimal`, `date`, `guid`, `string`, `int?`, `int64?`, `bool?`, `float?`, `decimal?`, `date?`, `guid?`, `int option`, `int64 option`, `bool option`, `float option`, `decimal option`, `date option`, `guid option` and `string option`.<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;You can also specify a unit and the name of the column like this: `Name (type&amp;lt;unit&amp;gt;)`, or you can override only the name. If you don&#39;t want to specify all the columns, you can reference the columns by name like this: `ColumnName=type`.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;HasHeaders&#39;&gt;Whether the sample contains the names of the columns as its first line.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;IgnoreErrors&#39;&gt;Whether to ignore rows that have the wrong number of columns or which can&#39;t be parsed using the inferred or specified schema. Otherwise an exception is thrown when these rows are encountered.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;SkipRows&#39;&gt;SKips the first n rows of the CSV file.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;AssumeMissingValues&#39;&gt;When set to true, the type provider will assume all columns can have missing values, even if in the provided sample all values are present. Defaults to false.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;PreferOptionals&#39;&gt;When set to true, inference will prefer to use the option type instead of nullable types, `double.NaN` or `&quot;&quot;` for missing values. Defaults to false.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Quote&#39;&gt;The quotation mark (for surrounding values containing the delimiter). Defaults to `&quot;`.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;MissingValues&#39;&gt;The set of strings recogized as missing values. Defaults to `NaN,NA,N/A,#N/A,:,-,TBA,TBD`.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;CacheRows&#39;&gt;Whether the rows should be caches so they can be iterated multiple times. Defaults to true. Disable for large datasets.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Culture&#39;&gt;The culture used for parsing numbers and dates. Defaults to the invariant culture.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;Encoding&#39;&gt;The encoding used to read the sample. You can specify either the character set name or the codepage number. Defaults to UTF8 for files, and to ISO-8859-1 the for HTTP requests, unless `charset` is specified in the `Content-Type` response header.&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;ResolutionFolder&#39;&gt;A directory that is used when resolving relative file references (at design time and in hosted execution).&lt;/param&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;param name=&#39;EmbeddedResource&#39;&gt;When specified, the type provider first attempts to load the sample from the specified resource <br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(e.g. &#39;MyCompany.MyAssembly, resource_name.csv&#39;). This is useful when exposing types generated by the type provider.&lt;/param&gt;</em></div>
 <div class="tip" id="fs12">val getStockPrices : stock:&#39;a -&gt; count:&#39;b -&gt; float []<br /><br />Full name: Tutorial.getStockPrices<br /><em><br /><br />&#160;Returns prices of a given stock for a specified number <br />&#160;of days (starting from the most recent)</em></div>
@@ -216,7 +197,7 @@ to produce a matrix of scatter plots:</p>
 <div class="tip" id="fs15">val url : string</div>
 <div class="tip" id="fs16">val r : obj</div>
 <div class="tip" id="fs17">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
-<div class="tip" id="fs18">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : params indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...<br /><br />Full name: System.Array</div>
+<div class="tip" id="fs18">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : [&lt;ParamArray&gt;] indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...<br /><br />Full name: System.Array</div>
 <div class="tip" id="fs19">val rev : array:&#39;T [] -&gt; &#39;T []<br /><br />Full name: Microsoft.FSharp.Collections.Array.rev</div>
 <div class="tip" id="fs20">val msftOpens : float []<br /><br />Full name: Tutorial.msftOpens<br /><em><br /><br />&#160;Get opening prices for MSFT for the last 255 days</em></div>
 <div class="tip" id="fs21">val msft : SymbolicExpression<br /><br />Full name: Tutorial.msft</div>

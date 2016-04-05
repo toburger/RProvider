@@ -38,36 +38,35 @@
         <div class="span9" id="main">
           
 <h1>Using R provider on Mac and Linux</h1>
-
 <p>The most recent version of the R type provider can be used on Mac and Linux using
 Mono. However, there is a bit of setup that you need to go through first. This document
 describes the necessary steps for using R provider on Mac using Xamarin Studio, but
-it should be easily adaptable for other configuration. If no, please <a href="https://github.com/BlueMountainCapital/FSharpRProvider/blob/master/docs/content/mac-and-linux.fsx">edit this 
+it should be easily adaptable for other configuration. If no, please <a href="https://github.com/BlueMountainCapital/FSharpRProvider/blob/master/docs/content/mac-and-linux.fsx">edit this
 file</a>
 to add more details!</p>
-
 <p>In summary, you need the following:</p>
-
 <ul>
-<li>Download and build 64 bit version of Mono, because the default installation is
-32 bit and R provider only works with 64 bit version.</li>
-<li>Tell Xamarin Studio to run 64 bit version of F# Interactive (the main IDE
-will still run as 32 bit, which is fine).</li>
-<li>Create a file <code>~/.rprovider.conf</code> with configuration that tells R provider
-where to find 64 bit version of mono.</li>
+<li>
+Download and build 64 bit version of Mono, because the default installation is
+32 bit and R provider only works with 64 bit version.
+</li>
+<li>
+Tell Xamarin Studio to run 64 bit version of F# Interactive (the main IDE
+will still run as 32 bit, which is fine).
+</li>
+<li>
+Create a file <code>~/.rprovider.conf</code> with configuration that tells R provider
+where to find 64 bit version of mono.
+</li>
 </ul>
-
-<p>This page is based on <a href="http://rawgit.com/evelinag/Projects/master/RDotNetOnMac/output/RDotNetOnMac.html">this excellent write-up on running R.NET on 
-Mac</a> by 
+<p>This page is based on <a href="http://rawgit.com/evelinag/Projects/master/RDotNetOnMac/output/RDotNetOnMac.html">this excellent write-up on running R.NET on
+Mac</a> by
 <a href="http://evelinag.com/">Evelina Gabasova</a>. The page has some more details and hints that
 you may need if the simplified version below does not work for you.</p>
-
 <h2>Installing 64 bit version of Mono</h2>
-
 <p>First of all, you need 64 bit version of Mono. To do this, you'll need command line tools
 <code>autoconf</code>, <code>automake</code> and <code>libtool</code>. Probably the easiest way to do this is to install
 <a href="http://brew.sh/">Homebrew</a> (but feel free to use your favorite tool) and then run:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -76,10 +75,8 @@ you may need if the simplified version below does not work for you.</p>
 brew install autoconf
 brew install libtool
 </code></pre></td></tr></table>
-
-<p>Now you can use <code>git</code> to get the latest version of Mono from GitHub and install it. The 
+<p>Now you can use <code>git</code> to get the latest version of Mono from GitHub and install it. The
 following installs it into <code>/usr/local/mono64</code> (feel free to change this too):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -94,30 +91,23 @@ cd mono
 make
 make install
 </code></pre></td></tr></table>
-
 <p>You might get a timeout from <code>git</code> when running the <code>autogen</code>-command, if you are behind
 a firewall. To fix this just run the following, which will force <code>git</code> to clone using
 "<a href="https://"">https://"</a> instead of "git://":</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="text">git config --global url."https://".insteadOf git://
 </code></pre></td></tr></table>
-
-<p>Now we can run Mono in 64-bit explicitly using <code>/usr/local/mono64/bin/mono</code>. Next, we need 
+<p>Now we can run Mono in 64-bit explicitly using <code>/usr/local/mono64/bin/mono</code>. Next, we need
 to create a launcher script that will start F# Interactive in 64 bit.</p>
-
 <h2>Running F# Interactive in 64 bit</h2>
-
 <p>The F# Interactive launcher that comes
 with standard installation of Mono is <code>fsharpi</code>. On Mac, you can find it (depending on your
 Mono version) in a folder like <code>/Library/Frameworks/Mono.framework/Versions/3.4.0/bin/</code>.</p>
-
 <p>Create a copy of this file called, for example, <code>fsharpi64</code> (in the same folder) and change
 the bit that points to the Mono installation, so that it points to the newly installed 64 bit
 version. Also, change <code>fsi.exe</code> to <code>fsiAnyCpu.exe</code> at the end. The whole thing should be on
 a single line, but the following shows it with newlines for better readability:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -128,44 +118,33 @@ a single line, but the following shows it with newlines for better readability:<
     /Library/Frameworks/Mono.framework/Versions/3.4.0/lib/mono/4.0/fsiAnyCpu.exe 
     --exename:$(basename $0) "$@"
 </code></pre></td></tr></table>
-
 <p>When you start Xamarin Studio, you can now tell it to use <code>fsharpi64</code> instead of <code>fsharpi</code>.
 To do this, go to <code>Preferences &gt; Other &gt; F# Settings &gt; F# interactive</code>. Once you change this,
-you can test which version of F# Interactive you're running by entering <code>System.IntPtr.Size</code> 
+you can test which version of F# Interactive you're running by entering <code>System.IntPtr.Size</code>
 (if the result is 4, you're running 32 bit; if the result is 8, you're on a 64 bit).</p>
-
 <h2>Configuring R provider</h2>
-
 <p>Finally, you need to tell the R provider where to find the 64 bit installation on Mono (the
-R provider starts a background process to communicate with R using the 64 bit version). To 
+R provider starts a background process to communicate with R using the 64 bit version). To
 do that, create a file <code>~/.rprovider.conf</code> (that is, in your home folder) containing a single
 line <code>MONO64=/usr/local/mono64/bin/mono</code>.</p>
-
 <p>You can create the file using the following command:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="text">echo MONO64=$MONO_PREFIX/bin/mono &gt; ~/.rprovider.conf
 </code></pre></td></tr></table>
-
 <p>And this is all you should need! One more thing to check is to make sure that R is in your
 PATH (and the R provider will be able to find it). To do that, open Terminal and type
 <code>R --print-home</code>. This command should print the home folder and is used by the R type
 provider.</p>
-
 <p>If calling <code>R --print-home</code> does not work, you'll need to create an environment variable
-<code>R_HOME</code> and point it to the R home folder. On Mac, this is something like 
+<code>R_HOME</code> and point it to the R home folder. On Mac, this is something like
 <code>/Library/Frameworks/R.framework/Resources</code> (check that <code>$R_HOME/lib/libR.dylib</code> exists).</p>
-
 <h2>Testing the R provider</h2>
-
 <p>Now you can open Xamarin studio and start playing with the R type provider. The easiest way
 to do that is to create a new F# Tutorial, add a new file (say <code>Test.fsx</code>) and reference
 R provider using NuGet (right click on the project <code>Add &gt; Add Packages...</code> and search
 for "rprovider").</p>
-
 <p>Now, type the following in the script file (with the correct R provider version):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -186,14 +165,11 @@ for "rprovider").</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p>The <code>#load</code> command loads the R provider. The first line disables warnings about unnecessary 
+<p>The <code>#load</code> command loads the R provider. The first line disables warnings about unnecessary
 folder references (a few are generated by the loader script). Finally, the <code>open</code> declarations
 open a number of standard R packages.</p>
-
 <p>Now we can run some calculations and create charts. When using R on Mac, the default graphics
 device (Quartz) sometimes hangs, but X11 is working without issues, so the following uses X11:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -218,9 +194,7 @@ device (Quartz) sometimes hangs, but X11 is working without issues, so the follo
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Diagnostics and debugging</h2>
-
 <p>If you encounter any issues, please do not hesitate to submit an issue! You can do that on the
 <a href="https://github.com/BlueMountainCapital/FSharpRProvider/issues">GitHub page</a>. Before submitting
 an issue, please see the <a href="diagnostics.html">Diagnostics and debugging page</a>, which tells you how

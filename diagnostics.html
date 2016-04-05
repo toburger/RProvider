@@ -38,52 +38,40 @@
         <div class="span9" id="main">
           
 <h1>Diagnostics and debugging</h1>
-
 <p>The R type provider has an extensive logging to help developers diagnose
 potential issues. If you encounter any issues with the R type provider, this
 page gives you all the information you need to create a log file with detailed
 trace of what is going one. This may give you some hints on what is wrong &amp; a
 detailed report that you can send when <a href="https://github.com/BlueMountainCapital/FSharpRProvider/issues">submitting an
 issue</a>.</p>
-
 <p><strong>TL;DR</strong> The logging is enabled by setting an environment variable
 <code>RPROVIDER_LOG</code> to a file name where the log should be saved. The file does
 not have to exist, but the folder where it is located has to.</p>
-
 <h2>Enabling logging on Windows</h2>
-
 <p>On Windows, you can set environment variables by going to system properties
 (this varies depending on the OS version, but generally right click on
 "My Computer" and select a link or button saying something like "Change settings").</p>
-
 <p>This should open a new dialog, where you can go to "Advanced", and click on the
 "Environment Variables" button. Here, you can add the variable as either per-user
 or per-system and save it. For example, create a folder <code>C:\Temp</code> and set
 <code>RPROVIDER_LOG</code> to <code>C:\Temp\rlog.txt</code>. After you restart Visual Studio, the
 R provider will start logging.</p>
-
 <h2>Enabling logging on Mac/Linux</h2>
-
 <p>If you're using Xamarin Studio on Mac, then the easiest option is to set the
 variable from Terminal and then start Xamarin Studio from terminal. Note that
 if you set the environment variable from terminal, but launch Xamarin Studio
 from Dock or in some other way, it will not see the variable!</p>
-
 <p>The following should do the trick (assuming the folder <code>/Users/tomasp/Temp</code> exists):</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip"><code lang="text">export RPROVIDER_LOG=/Users/tomasp/Temp/rlog.txt
 open -n /Applications/Xamarin\ Studio.app/
 </code></pre></td></tr></table>
-
 <p>This will set the variable and start a new instance of Xamarin Studio in the current
 context. Once it appears, reporduce the operation that causes the error, close
 Xamarin Studio and look at the log file.</p>
-
 <h2>Enabling logging in a custom build</h2>
-
 <p>If you're building R provider from source, you can also enable logging by changing
 the <code>loggingEnabled</code> constant in the source code (and change <code>logFile</code> if you want
 to override the default location). See the <a href="https://github.com/BlueMountainCapital/FSharpRProvider/blob/master/src/RProvider/Logging.fs#L13">right place for this on

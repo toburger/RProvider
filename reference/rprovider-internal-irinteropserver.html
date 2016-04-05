@@ -47,10 +47,8 @@
 <p>Interface that is used for communication between the R provider server
 (RProvider.Server.exe) which communicates with R and the client that runs
 in the host IDE process (Visual Studio, Xamarin Studio etc.)</p>
-
-<p>NOTE: In order to support standalone compilation of <code>RProvider.Server.exe</code> (which 
+<p>NOTE: In order to support standalone compilation of <code>RProvider.Server.exe</code> (which
 inlines the F# Core library), the interface does not expose any F# Core types.</p>
-
 
 </div>
   <h3>Instance members</h3>
@@ -76,9 +74,8 @@ inlines the F# Core library), the interface does not expose any F# Core types.</
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Returns an array with binding information. The first string is the name of the
-function. The second string is serialized <code>RValue</code> with information about the
+function. The second string is serialized <a href="rprovider-rinterop-rvalue.html" title="RValue"><code>RValue</code></a> with information about the
 kind of the binding and function parameters (use <code>deserializeRValue</code>).</p>
-
 
 
         </td>
@@ -102,7 +99,6 @@ kind of the binding and function parameters (use <code>deserializeRValue</code>)
           <p>Returns an array with pairs consisting of function name and its description</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -122,7 +118,6 @@ kind of the binding and function parameters (use <code>deserializeRValue</code>)
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Returns the description (documentation) for a given package</p>
-
 
 
         </td>
@@ -146,7 +141,6 @@ kind of the binding and function parameters (use <code>deserializeRValue</code>)
           <p>Returns an array with the names of all installed packages (e.g. "base", "graphics" etc.)</p>
 
 
-
         </td>
       </tr>
       <tr>
@@ -167,9 +161,8 @@ kind of the binding and function parameters (use <code>deserializeRValue</code>)
             </a>
           <p>Given an <code>.rdata</code> file, returns the names of the symbols in the file, together
 with an F# type that it can be converted to (this is done by getting the type
-of <code>symExpr.Value</code> using currently installed convertors). If the type is not 
+of <code>symExpr.Value</code> using currently installed convertors). If the type is not
 available, this returns <code>null</code>.</p>
-
 
 
         </td>
@@ -194,7 +187,7 @@ available, this returns <code>null</code>.</p>
 string returns the error. Otherwise, the value is <code>null</code>.</p>
 
 
-
+              <p>CompiledName: <code>get_InitializationErrorMessage</code></p>
         </td>
       </tr>
       <tr>
@@ -214,7 +207,6 @@ string returns the error. Otherwise, the value is <code>null</code>.</p>
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Loads the package (using R's <code>require</code>). This should be called before <code>GetBindings</code>.</p>
-
 
 
         </td>

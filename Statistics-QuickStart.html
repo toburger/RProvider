@@ -38,23 +38,17 @@
         <div class="span9" id="main">
           
 <h1>Quickstart: Using Statistical Packages</h1>
-
 <p>R is a programming language designed for statistics and data mining.
 The R community is strong, and created an incredibly rich open source
 ecosystem of packages.</p>
-
 <p>The F# R Type Provider enables you to use every single one of them,
 from within the F# environment. You can manipulate data using F#,
 send it to R for computation, and extract back the results.</p>
-
 <h2>Example: Linear Regression</h2>
-
-<p>Let's perform a simple linear regression from the F# interactive, 
+<p>Let's perform a simple linear regression from the F# interactive,
 using the R.lm function.</p>
-
-<p>Assuming you installed the R Type Provider in your project from NuGet, 
+<p>Assuming you installed the R Type Provider in your project from NuGet,
 you can reference the required libraries and packages this way:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -75,14 +69,10 @@ you can reference the required libraries and packages this way:</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p>Once the libraries and packages have been loaded, 
+<p>Once the libraries and packages have been loaded,
 Imagine that our true model is</p>
-
 <p>Y = 5.0 + 3.0 <em> X1 - 2.0 </em> X2 + noise</p>
-
 <p>Let's generate a fake dataset that follows this model:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
@@ -107,14 +97,11 @@ Imagine that our true model is</p>
 </code></pre></td>
 </tr>
 </table>
-
-<p>Using linear regression on this dataset, we should be able to 
+<p>Using linear regression on this dataset, we should be able to
 estimate the coefficients 5.0, 3.0 and -2.0, with some imprecision
 due to the "noise" part.</p>
-
 <p>Let's first put our dataset into a R dataframe; this allows us
 to name our vectors, and use these names in R formulas afterwards:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -131,37 +118,31 @@ to name our vectors, and use these names in R formulas afterwards:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>We can now use R to perform a linear regression.
 We call the <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/lm.html">R.lm function</a>,
-passing it the formula we want to estimate. 
-(See the <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/formula.html">R manual on formulas</a> 
+passing it the formula we want to estimate.
+(See the <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/formula.html">R manual on formulas</a>
 for more on their somewhat esoteric construction)</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="i">result</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs21', 38)" onmouseover="showTip(event, 'fs21', 38)" class="f">lm</span>(<span class="i">formula</span> <span class="o">=</span> <span class="s">&quot;Y~X1+X2&quot;</span>, <span class="i">data</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs14', 39)" onmouseover="showTip(event, 'fs14', 39)" class="i">dataset</span>)
 </code></pre></td>
 </tr>
 </table>
-
 <h2>Extracting Results from R to F#</h2>
-
-<p>The result we get back from R is a R Expression. 
+<p>The result we get back from R is a R Expression.
 The R Type Provider tries as much as possible to keep data
 as R Expressions, rather than converting back-and-forth
-between F# and R types. It limits translations 
-between the 2 languages, which has performance benefits, 
-and simplifies composing R operations. On the other hand, 
-we need to extract the results from the R expression 
+between F# and R types. It limits translations
+between the 2 languages, which has performance benefits,
+and simplifies composing R operations. On the other hand,
+we need to extract the results from the R expression
 into F# types.</p>
-
-<p>The <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/lm.html">R docs for lm</a> 
-describes what R.lm returns: a R List. We can now retrieve each element, 
-accessing it by name (as defined in the documentation). 
-For instance, let's retrieve the coefficients and residuals, 
+<p>The <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/lm.html">R docs for lm</a>
+describes what R.lm returns: a R List. We can now retrieve each element,
+accessing it by name (as defined in the documentation).
+For instance, let's retrieve the coefficients and residuals,
 which are both R vectors containg floats:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -170,12 +151,10 @@ which are both R vectors containg floats:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>We can also produce summary statistics about our model,
 like R^2, which measures goodness-of-fit - close to 0
 indicates a very poor fit, and close to 1 a good fit.
 See <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/summary.lm.html">R docs for the details on Summary</a>.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 </pre></td>
@@ -184,19 +163,16 @@ See <a href="http://stat.ethz.ch/R-manual/R-patched/library/stats/html/summary.l
 </code></pre></td>
 </tr>
 </table>
-
 <p>Finally, we can directly pass results, which is a R expression,
 to R.plot, to produce some fancy charts describing our model:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs27', 52)" onmouseover="showTip(event, 'fs27', 52)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 53)" onmouseover="showTip(event, 'fs28', 53)" class="f">plot</span> <span onmouseout="hideTip(event, 'fs19', 54)" onmouseover="showTip(event, 'fs19', 54)" class="i">result</span>
 </code></pre></td>
 </tr>
 </table>
-
 <p>That's it - while simple, we hope this example illustrate
-how you would go about to use any existing R statistical package. 
+how you would go about to use any existing R statistical package.
 While the details would differ, the general approach would
 remain the same. Happy modelling!</p>
 

@@ -38,18 +38,14 @@
         <div class="span9" id="main">
           
 <h1>Reading and writing RData files</h1>
-
 <p>When using R, you can save and load data sets as <code>*.rdata</code> files. These can be easily
 exported and consumed using the R provider too, so if you want to perform part of your
-data acquisition, analysis and visualization using F# and another part using R, you 
+data acquisition, analysis and visualization using F# and another part using R, you
 can easily pass the data between F# and R as <code>*.rdata</code> files.</p>
-
 <h2>Passing data from R to F#</h2>
-
 <p>Let's say that you have some data in R and want to pass them to F#. To do that, you
 can use the <code>save</code> function in R. The following R snippet creates a simple <code>*.rdata</code>
 file containing a couple of symbols from the sample <code>volcano</code> data set:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -62,12 +58,10 @@ volcanoMean &lt;- mean(volcanoList)
 symbols &lt;- c("volcano", "volcanoList", "volcanoMean")
 save(list=symols, file="C:/data/sample.rdata")
 </code></pre></td></tr></table>
-
 <p>To import the data on the F# side, you can use the <code>RData</code> type provider that is
 available in the <code>RProvider</code> namespace. It takes a static parameter specifying the
 path of the file (absolute or relative) and generates a type that exposes all the
 saved values as static members:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -90,20 +84,17 @@ saved values as static members:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>When accessed, the type provider automatically converts the data from the R format
 to F# format. In the above example, <code>volcanoList</code> is imported as <code>float[]</code> and
-the <code>volcanoMean</code> value is a singleton array. (The provider does not detect that 
+the <code>volcanoMean</code> value is a singleton array. (The provider does not detect that
 this is a singleton, so you can get the value using <code>sample.volcanoMean.[0]</code>).
 For the <code>sample.volcano</code> value, the R provider does not have a default conversion
 and so it is exposed as <code>SymbolicExpression</code>.</p>
-
 <p>When you have a number of <code>*.rdata</code> files containing data in the same format, you can
 pick one of them as a sample (which will be used to determine the fields of the type)
 and then pass the file name to the constructor of the generated type to load it.
 For example, if we had files <code>data/sample_1.rdata</code> to <code>data/sample_10.rdata</code>, we could
 read them as:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -116,19 +107,15 @@ read them as:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>Note that the default conversions available depend on the plugins that are currently
 available. For example, when you install the enrie <a href="http://www.fslab.org">FsLab</a> package
-with the <a href="http://bluemountaincapital.github.io/Deedle/">Deedle</a> library, the <code>RData</code> 
+with the <a href="http://bluemountaincapital.github.io/Deedle/">Deedle</a> library, the <code>RData</code>
 provider will automatically expose data frames as Deedle <code>Frame&lt;string, string&gt;</code> values.</p>
-
 <h2>Passing data from F# to R</h2>
-
-<p>If you perform data acquisition in F# and then want to pass the data to R, you 
-can use the standard R functions for saving the <code>*.rdata</code> files. The easiest 
+<p>If you perform data acquisition in F# and then want to pass the data to R, you
+can use the standard R functions for saving the <code>*.rdata</code> files. The easiest
 option is to call the <code>R.assign</code> function to define named values in the R environment
 and then use <code>R.save</code> to save the environment to a file:</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -151,12 +138,10 @@ and then use <code>R.save</code> to save the environment to a file:</p>
 </code></pre></td>
 </tr>
 </table>
-
 <p>It is recommended to use the <code>list</code> parameter of the <code>save</code> function to specify the
 names of the symbols that should be saved, rather than saving <em>all</em> symbols. The R
 provider uses additional temporary symbols and so the saved file would otherwise contain
 unnecessary fileds.</p>
-
 <p>Once you save the file using the above command, you can re-load it again using
 the <code>RData</code> type provider, such as: <code>new RData&lt;"C:/temp/volcano.rdata"&gt;()</code>.</p>
 
@@ -173,7 +158,7 @@ the <code>RData</code> type provider, such as: <code>new RData&lt;"C:/temp/volca
 <div class="tip" id="fs11">val data : RData&lt;...&gt;</div>
 <div class="tip" id="fs12">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
 <div class="tip" id="fs13">val avg : float<br /><br />Full name: Reading-rdata.avg</div>
-<div class="tip" id="fs14">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : params indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...<br /><br />Full name: System.Array</div>
+<div class="tip" id="fs14">type Array =<br />&#160;&#160;member Clone : unit -&gt; obj<br />&#160;&#160;member CopyTo : array:Array * index:int -&gt; unit + 1 overload<br />&#160;&#160;member GetEnumerator : unit -&gt; IEnumerator<br />&#160;&#160;member GetLength : dimension:int -&gt; int<br />&#160;&#160;member GetLongLength : dimension:int -&gt; int64<br />&#160;&#160;member GetLowerBound : dimension:int -&gt; int<br />&#160;&#160;member GetUpperBound : dimension:int -&gt; int<br />&#160;&#160;member GetValue : [&lt;ParamArray&gt;] indices:int[] -&gt; obj + 7 overloads<br />&#160;&#160;member Initialize : unit -&gt; unit<br />&#160;&#160;member IsFixedSize : bool<br />&#160;&#160;...<br /><br />Full name: System.Array</div>
 <div class="tip" id="fs15">val average : array:&#39;T [] -&gt; &#39;T (requires member ( + ) and member DivideByInt and member get_Zero)<br /><br />Full name: Microsoft.FSharp.Collections.Array.average</div>
 <div class="tip" id="fs16">val sqrs : float []<br /><br />Full name: Reading-rdata.sqrs</div>
 <div class="tip" id="fs17">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><br />Full name: Microsoft.FSharp.Collections.Array.map</div>

@@ -46,9 +46,8 @@
 <div class="xmldoc">
 <p>This inteface can be used for providing new convertors that can convert
 custom .NET data types to R values. The converter is used whenever the
-user calls an R function (such as <code>R.foo(...)</code>) with an arguments that 
+user calls an R function (such as <code>R.foo(...)</code>) with an arguments that
 is of type <code>TInType</code>.</p>
-
 
 </div>
   <h3>Instance members</h3>
@@ -75,14 +74,11 @@ is of type <code>TInType</code>.</p>
             </a>
           <p>The method is called when the user calls any of the provided R
 functions with a value of type <code>'TInType</code> as an argument.</p>
-
 <h2>Example</h2>
-
-<p>To use this interface, you need to write a plugin (<code>YourPlugin.Plugin.dll</code>) 
-that exports an implementation of this interface using MEF. The method 
+<p>To use this interface, you need to write a plugin (<code>YourPlugin.Plugin.dll</code>)
+that exports an implementation of this interface using MEF. The method
 <code>Convert</code> of the interface is called with the value of <code>'TInType</code> and should
 return an R symbolic expression.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -97,7 +93,6 @@ return an R symbolic expression.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <div class="tip" id="fs1">val typeof&lt;&#39;T&gt; : System.Type<br /><br />Full name: Microsoft.FSharp.Core.Operators.typeof</div>
 <div class="tip" id="fs2">Multiple items<br />type ConvertMyThingToR =<br />&#160;&#160;interface obj<br />&#160;&#160;new : unit -&gt; ConvertMyThingToR<br />&#160;&#160;override Convert : engine:&#39;a * input:&#39;b -&gt; &#39;c<br /><br />Full name: docs.ConvertMyThingToR<br /><br />--------------------<br />new : unit -&gt; ConvertMyThingToR</div>
 <div class="tip" id="fs3">val x : ConvertMyThingToR</div>

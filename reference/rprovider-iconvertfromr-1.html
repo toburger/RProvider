@@ -49,7 +49,6 @@ R values to .NET types. The converter is used whenever the users calls the
 <code>se.GetValue&lt;'TOutType&gt;()</code> on a <code>SymbolicExpression</code> value returned from R
 provider.</p>
 
-
 </div>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
@@ -75,14 +74,11 @@ provider.</p>
             </a>
           <p>The method is called when the user calls <code>GetValue&lt;'TOutType&gt;()</code> on a
 <code>SymbolicExpression</code> value returned from the R provider.</p>
-
 <h2>Example</h2>
-
-<p>To use this interface, you need to write a plugin (<code>YourPlugin.Plugin.dll</code>) 
-that exports an implementation of this interface using MEF. The method 
+<p>To use this interface, you need to write a plugin (<code>YourPlugin.Plugin.dll</code>)
+that exports an implementation of this interface using MEF. The method
 <code>Convert</code> of the interface can return <code>None</code> when the conversion is not
 possible.</p>
-
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -97,7 +93,6 @@ possible.</p>
 </code></pre></td>
 </tr>
 </table>
-
 <div class="tip" id="fs1">val typeof&lt;&#39;T&gt; : System.Type<br /><br />Full name: Microsoft.FSharp.Core.Operators.typeof</div>
 <div class="tip" id="fs2">Multiple items<br />type ConvertMyThingFromR =<br />&#160;&#160;interface obj<br />&#160;&#160;new : unit -&gt; ConvertMyThingFromR<br />&#160;&#160;override Convert : symExpr:&#39;a -&gt; &#39;b option<br /><br />Full name: docs.ConvertMyThingFromR<br /><br />--------------------<br />new : unit -&gt; ConvertMyThingFromR</div>
 <div class="tip" id="fs3">val x : ConvertMyThingFromR</div>
