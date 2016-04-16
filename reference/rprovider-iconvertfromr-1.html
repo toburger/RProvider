@@ -87,8 +87,8 @@ possible.</p>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">[&lt;<span class="i">Export</span>(<span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">typeof</span><span class="o">&lt;</span><span class="i">IConvertFromR</span><span class="o">&lt;</span><span class="i">MyType</span><span class="o">&gt;</span><span class="o">&gt;</span>)&gt;]
 <span class="k">type</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="t">ConvertMyThingFromR</span>() <span class="o">=</span>
-  <span class="k">interface</span> <span class="i">IConvertFromR</span><span class="o">&lt;</span><span class="i">MyThing</span><span class="o">&gt;</span> <span class="k">with</span>
-  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="f">Convert</span>(<span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">symExpr</span>) <span class="o">=</span>
+  <span class="k">interface</span> <span class="i">IConvertFromR</span><span class="o">&lt;</span><span class="i">MyThing</span><span class="o">&gt;</span> <span class="k">with</span> 
+  <span class="k">member</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="f">Convert</span>(<span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">symExpr</span>) <span class="o">=</span> 
     <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="p">Some</span>(<span class="k">new</span> <span class="i">MyThing</span>()) <span class="c">// TODO: Convert &#39;symExpr&#39; from R.</span>
 </code></pre></td>
 </tr>
