@@ -6,7 +6,7 @@
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An F# Type Provider providing strongly typed access to the R statistical package">
-    <meta name="author" content="BlueMountain Capital">
+    <meta name="author" content="BlueMountain Capital, FsLab">
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
     <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
@@ -14,8 +14,8 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
 
-    <link type="text/css" rel="stylesheet" href="http://bluemountaincapital.github.io/FSharpRProvider/content/style.css" />
-    <script type="text/javascript" src="http://bluemountaincapital.github.io/FSharpRProvider/content/tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://fslab.org/RProvider/content/style.css" />
+    <script type="text/javascript" src="https://fslab.org/RProvider/content/tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -26,12 +26,12 @@
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
           <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://bluemountaincapital.github.io/Deedle"><img height="16" width="16" src="http://fsharp.org/images/thumbs/Deedle.png" /> Deedle</a></li>
-          <li><a href="http://fsharp.github.io/FSharp.Charting/"><img height="16" width="16" src="http://fsharp.org/images/thumbs/FSharp.Charting.png" /> F# Charting</a></li>
+          <li><a href="https://fslab.org/Deedle"><img height="16" width="16" src="http://fsharp.org/images/thumbs/Deedle.png" /> Deedle</a></li>
+          <li><a href="https://fslab.org/FSharp.Charting"><img height="16" width="16" src="http://fsharp.org/images/thumbs/FSharp.Charting.png" /> F# Charting</a></li>
           <li><a href="http://fsharp.github.io/FSharp.Data"><img height="16" width="16" src="http://fsharp.org/images/thumbs/FSharp.Data.png" /> F# Data</a></li>
           <li><a href="http://fsprojects.github.io/FSharp.Data.Toolbox"><img height="16" width="16" src="http://fsharp.org/images/thumbs/FSharp.Data.Toolbox.png" /> F# Data Toolbox</a></li>
         </ul>
-        <h3 class="muted"><a href="http://bluemountaincapital.github.io/FSharpRProvider/index.html">R Type Provider</a></h3>
+        <h3 class="muted"><a href="https://fslab.org/RProvider/index.html">R Type Provider</a></h3>
       </div>
       <hr />
       <div class="row">
@@ -41,7 +41,7 @@
 <p>The most recent versions of the R type provider can be used on Mac and Linux using
 Mono. However, there is a bit of setup that you need to go through first. This page
 describes the necessary steps for using R provider on Mac using Xamarin Studio, but
-it should be easily adaptable for other configuration. If no, please <a href="https://github.com/BlueMountainCapital/FSharpRProvider/blob/master/docs/content/mac-and-linux.fsx">edit this
+it should be easily adaptable for other configuration. If no, please <a href="https://github.com/fslaborg/RProvider/blob/master/docs/content/mac-and-linux.fsx">edit this
 file</a>
 to add more details!</p>
 <p>In summary, you need the following:</p>
@@ -189,7 +189,7 @@ device (Quartz) sometimes hangs, but X11 is working without issues, so the follo
 <span class="l">15: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// basic test if RProvider works correctly</span>
-<span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="f">mean</span>([<span class="n">1</span>;<span class="n">2</span>;<span class="n">3</span>;<span class="n">4</span>])
+<span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs6', 9)" onmouseover="showTip(event, 'fs6', 9)" class="i">mean</span>([<span class="n">1</span>;<span class="n">2</span>;<span class="n">3</span>;<span class="n">4</span>])
 <span class="c">// val it : RDotNet.SymbolicExpression = [1] 2.5</span>
 
 <span class="c">// testing graphics</span>
@@ -199,7 +199,7 @@ device (Quartz) sometimes hangs, but X11 is working without issues, so the follo
 <span class="c">// (converting results to &#39;float&#39;) and plot it</span>
 [ <span class="k">for</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="i">x</span> <span class="k">in</span> <span class="n">0.0</span> <span class="o">..</span> <span class="n">0.1</span> <span class="o">..</span> <span class="n">3.14</span> <span class="k">-&gt;</span> 
     <span onmouseout="hideTip(event, 'fs5', 13)" onmouseover="showTip(event, 'fs5', 13)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 14)" onmouseover="showTip(event, 'fs10', 14)" class="f">sin</span>(<span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="i">x</span>)<span class="o">.</span><span class="f">GetValue</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="t">float</span><span class="o">&gt;</span>() ]
-<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="f">plot</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs12', 17)" onmouseover="showTip(event, 'fs12', 17)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="i">plot</span>
 
 <span class="c">// Plot the data from the standard &#39;Nile&#39; data set</span>
 <span onmouseout="hideTip(event, 'fs12', 19)" onmouseover="showTip(event, 'fs12', 19)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="f">plot</span>(<span onmouseout="hideTip(event, 'fs14', 21)" onmouseover="showTip(event, 'fs14', 21)" class="t">R</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 22)" onmouseover="showTip(event, 'fs15', 22)" class="i">Nile</span>)
@@ -208,7 +208,7 @@ device (Quartz) sometimes hangs, but X11 is working without issues, so the follo
 </table>
 <h2>Diagnostics and debugging</h2>
 <p>If you encounter any issues, please do not hesitate to submit an issue! You can do that on the
-<a href="https://github.com/BlueMountainCapital/FSharpRProvider/issues">GitHub page</a>. Before submitting
+<a href="https://github.com/fslaborg/RProvider/issues">GitHub page</a>. Before submitting
 an issue, please see the <a href="diagnostics.html">Diagnostics and debugging page</a>, which tells you how
 to create a log file with more detailed information about the issues.</p>
 <h2>Note: Manual installation 64 bit version of Mono</h2>
@@ -275,43 +275,43 @@ a firewall. To fix this just run the following, which will force <code>git</code
         </div>
         <div class="span3">
           <a href="https://nuget.org/packages/RProvider">
-            <img src="http://bluemountaincapital.github.io/FSharpRProvider/images/logo.png" style="width:140px;height:140px;margin:10px 0px 0px 35px;border-style:none;" />
+            <img src="https://fslab.org/RProvider/images/logo.png" style="width:140px;height:140px;margin:10px 0px 0px 35px;border-style:none;" />
           </a>
 
           <ul class="nav nav-list" id="menu">
             <li class="nav-header">R Type Provider</li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/index.html">Home page</a></li>
+            <li><a href="https://fslab.org/RProvider/index.html">Home page</a></li>
             <li class="divider"></li>
             <li><a href="https://nuget.org/packages/RProvider">Get Library via NuGet</a></li>
-            <li><a href="http://github.com/BlueMountainCapital/FSharpRProvider">Source Code on GitHub</a></li>
-            <li><a href="http://github.com/BlueMountainCapital/FSharpRProvider/blob/master/LICENSE.md">License (BSD)</a></li>
-            <li><a href="http://github.com/BlueMountainCapital/FSharpRProvider/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-            <li><a href="http://github.com/BlueMountainCapital/FSharpRProvider/issues">Bug reports & feature requests</a></li>
+            <li><a href="https://github.com/fslaborg/RProvider">Source Code on GitHub</a></li>
+            <li><a href="https://github.com/fslaborg/RProvider/blob/master/LICENSE.md">License (BSD)</a></li>
+            <li><a href="https://github.com/fslaborg/RProvider/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+            <li><a href="https://github.com/fslaborg/RProvider/issues">Bug reports & feature requests</a></li>
 
             <li class="nav-header">Documentation</li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/mac-and-linux.html">R provider on Mac/Linux</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/Statistics-QuickStart.html">Statistics walkthrough</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/Charts-QuickStart.html">Charting walkthrough</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/reading-rdata.html">Reading and writing RData</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/passing-data.html">Passing data between F# and R</a></li>
+            <li><a href="https://fslab.org/RProvider/mac-and-linux.html">R provider on Mac/Linux</a></li>
+            <li><a href="https://fslab.org/RProvider/Statistics-QuickStart.html">Statistics walkthrough</a></li>
+            <li><a href="https://fslab.org/RProvider/Charts-QuickStart.html">Charting walkthrough</a></li>
+            <li><a href="https://fslab.org/RProvider/reading-rdata.html">Reading and writing RData</a></li>
+            <li><a href="https://fslab.org/RProvider/passing-data.html">Passing data between F# and R</a></li>
             <li class="divider"></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/tutorial.html">Analysing stock prices</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/howto.html">R packages & naming</a></li>
+            <li><a href="https://fslab.org/RProvider/tutorial.html">Analysing stock prices</a></li>
+            <li><a href="https://fslab.org/RProvider/howto.html">R packages & naming</a></li>
 
             <li class="nav-header">Reference</li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/reference/index.html">API Reference</a></li>
+            <li><a href="https://fslab.org/RProvider/reference/index.html">API Reference</a></li>
        
             <li class="nav-header">Internals</li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/devnotes.html">Developer notes</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/diagnostics.html">Diagnostics & debugging</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/whatwhy.html">Whats and whys</a></li>
-            <li><a href="http://bluemountaincapital.github.io/FSharpRProvider/internals.html">How does it work</a></li>
+            <li><a href="https://fslab.org/RProvider/devnotes.html">Developer notes</a></li>
+            <li><a href="https://fslab.org/RProvider/diagnostics.html">Diagnostics & debugging</a></li>
+            <li><a href="https://fslab.org/RProvider/whatwhy.html">Whats and whys</a></li>
+            <li><a href="https://fslab.org/RProvider/internals.html">How does it work</a></li>
             
           </ul>
         </div>
       </div>
     </div>
-    <a href="http://github.com/BlueMountainCapital/FSharpRProvider"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <a href="https://github.com/fslaborg/RProvider"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
     <script>
       (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -319,7 +319,7 @@ a firewall. To fix this just run the following, which will force <code>git</code
         }, i[r].l = 1 * new Date(); a = s.createElement(o),
         m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
       })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-      ga('create', 'UA-45379232-2', 'bluemountaincapital.github.io');
+      ga('create', 'UA-45379232-2', 'fslab.org');
       ga('send', 'pageview');
     </script>
   </body>
