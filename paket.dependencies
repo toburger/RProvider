@@ -1,9 +1,9 @@
 source https://www.nuget.org/api/v2
 // framework: netstandard2.0
 
-nuget FsCheck 2.14.0 
-nuget FsCheck.Xunit 2.14.0 
-nuget FSharp.Data 3.1.1 
+nuget FsCheck 2.14.0
+nuget FsCheck.Xunit 2.14.0
+nuget FSharp.Data 3.1.1
 nuget FSharp.Formatting 3.1.0
 nuget R.NET 1.8.2
 nuget R.NET.FSharp 1.8.2
@@ -16,8 +16,8 @@ nuget FAKE 4.64.17
 nuget NuGet.CommandLine 5.0.2
 nuget FSharp.Core 4.6.2
 
-github fsprojects/FSharp.TypeProviders.SDK:ddfb906ecbac78dc9f0f5e172518a72cb5fdf651 src/ProvidedTypes.fsi
-github fsprojects/FSharp.TypeProviders.SDK:ddfb906ecbac78dc9f0f5e172518a72cb5fdf651 src/ProvidedTypes.fs
+github fsprojects/FSharp.TypeProviders.SDK:e9e9db7a23ee61676f6616179ff226328de3d66e src/ProvidedTypes.fsi
+github fsprojects/FSharp.TypeProviders.SDK:e9e9db7a23ee61676f6616179ff226328de3d66e src/ProvidedTypes.fs
 
 group Release
   source https://www.nuget.org/api/v2

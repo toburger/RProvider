@@ -11,7 +11,7 @@ open RProvider.Internal
 
 [<TypeProvider>]
 type public RProvider(cfg:TypeProviderConfig) as this =
-    inherit TypeProviderForNamespaces()
+    inherit TypeProviderForNamespaces(cfg)
 
     let useReflectionOnly = true
 
@@ -19,17 +19,17 @@ type public RProvider(cfg:TypeProviderConfig) as this =
         if useReflectionOnly then Assembly.ReflectionOnlyLoadFrom cfg.RuntimeAssembly
         else Assembly.LoadFrom cfg.RuntimeAssembly
 
-    static do 
+    static do
       // When RProvider is installed via NuGet, the RDotNet assembly and plugins
       // will appear typically in "../../*/lib/net40". To support this, we look at
       // RProvider.dll.config which has this pattern in custom key "ProbingLocations".
       // Here, we resolve assemblies by looking into the specified search paths.
       AppDomain.CurrentDomain.add_AssemblyResolve(fun source args ->
         resolveReferencedAssembly args.Name)
-      
+
     // Generate all the types and log potential errors
     let buildTypes () =
-        try 
+        try
           for ns, types in RTypeBuilder.initAndGenerate(runtimeAssembly) do
             this.AddNamespace(ns, types)
         with e ->
